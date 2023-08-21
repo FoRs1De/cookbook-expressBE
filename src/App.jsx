@@ -135,7 +135,9 @@ function App() {
           {recipe.map((groupRecipe) => (
             <Route
               key={groupRecipe.group}
-              path={`/:group/:name/:recipeId`}
+              path={`/${groupRecipe.group
+                .replace(/\s+/g, '-')
+                .toLowerCase()}/:recipe/:recipeId/`}
               element={<Recipe recipe={recipe} loading={loading} />}
             />
           ))}

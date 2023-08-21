@@ -1,50 +1,43 @@
-body {
-    justify-content: center;
-    background-image: url("BackgroundIMG.jpg");
-    background-position: center;
-    background-size: auto;
-}
-
 .title-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15%;
 }
 
 .title-message {
-    text-align: center;
-    margin-top: 30%;
-    font-size: 3vw;
-    font-family: Georgia, 'Times New Roman', Times, serif
+  text-align: center;
+  margin-top: 30%;
+  font-size: 3vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .message {
-    width: 65%;
-    margin-top: 3%;
-    font-size: 1vw;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    justify-self: center;
-    padding: 0 100px;
+  width: 65%;
+  margin-top: 3%;
+  font-size: 1vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  justify-self: center;
+  padding: 0 100px;
 }
 
 @media only screen and (max-width: 940px) {
-    .title-message {
-        width: 200px;
-        font-size: 30px;
-    }
+  .title-message {
+    width: 200px;
+    font-size: 30px;
+  }
 }
 
 @media only screen and (max-width: 940px) {
-    .message {
-        width: 350px;
-        font-size: 10px;
-    }
+  .message {
+    width: 350px;
+    font-size: 10px;
+  }
 }
 
 @media only screen and (max-width: 940px) {
-    .title-container {
-        padding: 0 15% 0 0;
-    }
+  .title-container {
+    padding: 0 15% 0 0;
+  }
 }

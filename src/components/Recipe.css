@@ -1,85 +1,85 @@
 .Title-Recipe {
-    padding: 100px 0 1em 0;
-    font-size: 4em;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-weight: 500;
-    text-align: center;
+  padding: 100px 0 1em 0;
+  font-size: 4em;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 500;
+  text-align: center;
 }
 
 .Description {
-    font-size: 20px;
-    padding: 2em 0 2em 0;
-    font-style: italic;
-    font-weight: 500;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  padding: 2em 0 2em 0;
+  font-style: italic;
+  font-weight: 500;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.ingredients-heading{
-    font-size: 2em;
-    padding-bottom: 1em;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+.ingredients-heading {
+  font-size: 2em;
+  padding-bottom: 1em;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 p {
-    font-weight: bold;
-    line-height: 30px;
-    border: 0.5px solid gray;
-    background-color:  #7ebb39;
-    width: 250px;
-    border-radius: 5px;
-    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.711);
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    margin: 0 0 5px 0;
+  font-weight: bold;
+  line-height: 30px;
+  border: 0.5px solid gray;
+  background-color: #7ebb39;
+  width: 250px;
+  border-radius: 5px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.711);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin: 0 0 5px 0;
 }
 
 .recipe-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 4em;
-    padding: 4em;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 4em;
+  padding: 4em;
+}
 
 @media only screen and (min-width: 1040px) {
-    .Description {
-        max-width: 800px;
-    }
+  .Description {
+    max-width: 800px;
+  }
 }
 
 img {
-    filter: drop-shadow(0 0 0.75rem black);
+  filter: drop-shadow(0 0 0.75rem black);
 }
 
 @media only screen and (min-width: 700px) {
-    img {
-        min-width: 500px;
-        height: auto;
-    }
+  img {
+    min-width: 500px;
+    height: auto;
+  }
 }
 
 @media only screen and (min-width: 424px) {
-    img {
-        width: 300px;
-        height: auto;
-    }
+  img {
+    width: 300px;
+    height: auto;
+  }
 }
 
 @media only screen and (width: 320px) {
-    img {
-        width: 220px;
-        height: auto;
-    }
+  img {
+    width: 220px;
+    height: auto;
+  }
 }
 
 @media only screen and (min-width: 321px) and (max-width: 376px) {
-    img {
-        width: 250px;
-        height: auto;
-    }
+  img {
+    width: 250px;
+    height: auto;
+  }
 }
 
 @media only screen and (max-width: 425px) {
-    .Title-Recipe {
-        font-size: 3em;
-    }
+  .Title-Recipe {
+    font-size: 3em;
+  }
 }

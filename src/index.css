@@ -3,3 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+Body {
+  justify-content: center;
+  background-image: url(BackgroundIMG.jpg);
+  background-position: center;
+  background-size: auto;
+}

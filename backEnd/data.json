@@ -1,20 +1,176 @@
 [
   {
-    "data": "hi"
+    "id": 1,
+    "name": "Salmon Soup",
+    "group": "soups",
+    "image": "https://www.themediterraneandish.com/wp-content/uploads/2020/03/salmon-soup-recipe-5-1024x1536.jpg",
+    "description": "Finnish Salmon Soup, or Lohikeitto, is a simple Nordic salmon chowder and a comforting 30 minute meal made with a light cream broth, melt-in-your-mouth chunks of salmon, and tons of fresh dill!",
+    "ingredients": [
+      "500g salmon filet",
+      "60g butter",
+      "1 large leek",
+      "5 cups water"
+    ]
   },
   {
-    "data": "hi"
+    "id": 2,
+    "name": "Ham and Split Pea Soup",
+    "group": "soups",
+    "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpublic-assets.meredithcorp.io%2F2f30af94b9645d812507afb234ecfe2f%2F1677514092426IMG_1926.JPG&q=60&c=sc&orient=true&poi=auto&h=512",
+    "description": "This cozy split pea soup with ham is hearty, flavorful, and oh-so comforting.",
+    "ingredients": [
+      "2 tablespoons butter",
+      "2 ribs celery, diced",
+      "0.5 onion, diced",
+      "3 cloves garlic, sliced",
+      "1 pound dried split peas, rinsed",
+      "1 pound ham, diced",
+      "1 bay leaf",
+      "1 quart chicken stock",
+      "2.5 cups water"
+    ]
   },
   {
-    "data": "hi2"
+    "id": 3,
+    "name": "Chicken Salad",
+    "group": "salads",
+    "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F9066022.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+    "description": "This chicken salad recipe is the best and a family favorite",
+    "ingredients": [
+      "0.5 cup blanched silvered almonds",
+      "0.5 cup mayonnaise",
+      "1 tablespoon lemon juice",
+      "0.25 teaspoon ground black pepper",
+      "2 cups chopped, cooked chicken meat",
+      "1 stalk celery, chopped"
+    ]
   },
   {
-    "data": "hi2"
+    "id": 4,
+    "name": "Old-Fashioned Potato Salad",
+    "group": "salads",
+    "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpublic-assets.meredithcorp.io%2Fb505424140f0fc4ef04c3c6f0e32d88f%2F168342303756520230506_164316.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+    "description": "This potato salad recipe is for the traditional creamy type of potato salad, with eggs, celery, and relish. It's perfect for making ahead to let the flavors develop.",
+    "ingredients": [
+      "5 potatoes",
+      "3 eggs",
+      "1 cup chopped celery",
+      "0.5 cup chopped onion",
+      "0.5 cup sweet pickle relish",
+      "0.25 cup mayonnaise",
+      "1 tablespoon prepared mustard",
+      "0.25 teaspoon garlic salt",
+      "0.25 celery salt",
+      "Ground black pepper to taste"
+    ]
   },
   {
-    "data": "hi4"
+    "id": 5,
+    "name": "Sloppy Joes",
+    "group": "sandwiches",
+    "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpublic-assets.meredithcorp.io%2F5dafa42cae05f8e2ee0f937128bfc67c%2F167794965825420230302_201611.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+    "description": "These crowd-pleasing Sloppy Joe sandwiches will take you back to your childhood!",
+    "ingredients": [
+      "1 pound lean ground beef",
+      "0.25 cup chopped onion",
+      "0.25 cup chopped green bell pepper",
+      "0.75 cup ketchup, or to taste",
+      "1 tablespoon brown sugar, or to taste",
+      "1 teaspoon yellow mustard, or to taste",
+      "0.5 teaspoon garlic powder",
+      "salt and ground black pepper to taste",
+      "6 hamburger buns, split"
+    ]
   },
   {
-    "data": "hi4"
+    "id": 6,
+    "name": "Grilled Cheese Sandwich",
+    "group": "sandwiches",
+    "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F8129823.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+    "description": "Learn how to make a grilled cheese sandwich in a nonstick pan with buttered bread and American Cheddar for a classic hot sandwich.",
+    "ingredients": [
+      "4 slices white bread",
+      "3 tablespoons butter, divided",
+      "2 slices Cheddar cheese"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Spicy Canned Salmon Salad Rice Bowl",
+    "group": "dinner",
+    "image": "https://www.allrecipes.com/thmb/sjEAMLMiGQIbUYZG6Z5RYWsaXIA=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/7558696_Spicy-Canned-Salmon-Salad-Rice-Bowl_Chef-Mo_4x3-6efacad1958d41d892d0b30ec8a7d3a7.jpg",
+    "description": "Canned salmon mixed with rice vinegar, Sriracha, and mayonnaise makes this one spicy salmon salad rice bowl.",
+    "ingredients": [
+      "1 cup chopped English cucumber",
+      "1 tablespoon low-sodium soy sauce",
+      "1 can pink salmon, skin and bone removed, drained and flaked",
+      "2.5 tablespoons chile-garlic sauce (such as Sriracha)",
+      "1 tablespoon light mayonnaise",
+      "1 tablespoon rice vinegar",
+      "1 cup cooked white rice",
+      "1 avocado - peeled, pitted, and sliced",
+      "0.5 teaspoon sesame seeds",
+      "1 tablespoon chopped green onion for garnish (optional)"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Grilled Tomahawk Steak",
+    "group": "dinner",
+    "image": "https://www.allrecipes.com/thmb/KFsMHU1dhZHfrYGgaORJ98GvnHk=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/7508957_Grilled-Tomahawk-Steak_Ashley-Elizabeth_4x3-5b17eab73d154d6394829d47d6ff3365.jpg",
+    "description": "This grilled tomahawk steak recipe is a showstopper, ideal for sharing with friends and family.",
+    "ingredients": [
+      "1 tablespoon brown sugar",
+      "1 tablespoon Montreal steak seasoning",
+      "2 teaspoons garlic powder",
+      "2 teaspoons onion powser",
+      "1 tomahawk steak (3-inch thick bone-in ribeye)",
+      "0.25 cup salted butter, at room temperature",
+      "1 tablespoon minced shallot",
+      "1 clove garlic, minced",
+      "1 tablespoon chopped fresh chives",
+      "2 teaspoons reserved steak rub"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Homemade Corn Dogs",
+    "group": "lunch",
+    "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpublic-assets.meredithcorp.io%2Feedf58777782615afbaef6cb847246df%2F1689127233395Homemade-Corn-Dogs-Horizontal.JPG&q=60&c=sc&orient=true&poi=auto&h=512",
+    "description": "I love the corn dogs you buy at carnivals but wanted to make them at home so I created this easy batter for frankfurters.",
+    "ingredients": [
+      "1 cup yellow cornmeal",
+      "1 cup all-purpose flour",
+      "0.25 cup white sugar",
+      "0.125 teaspoon black pepper",
+      "1 cup milk",
+      "1 egg",
+      "1 quart vegetable oil for frying",
+      "2 packages of beef frankfurters",
+      "16 wooden skewers"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Philly Steak Sandwich",
+    "group": "lunch",
+    "image": "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F8252452.jpg&q=60&c=sc&orient=true&poi=auto&h=512",
+    "description": "These Philly cheesesteak sandwiches are made with a delicious seasoning of herbs and spices.",
+    "ingredients": [
+      "0.5 teaspoon salt",
+      "0.5 teaspoon black pepper",
+      "0.5 teaspoon paprika",
+      "0.5 teapsoon onion powder",
+      "0.5 teaspoon garlic powder",
+      "0.5 teaspoon dried thyme",
+      "0.5 teaspoon dried marjoram",
+      "0.5 teaspoon dried basil",
+      "1 pound beef sirloin, cut into thin 2 inch strips",
+      "3 tablespoons vegetable oil",
+      "1 onion, sliced",
+      "1 green bell pepper, julienned",
+      "3 ounces Swiss cheese, thinly sliced",
+      "4 hoagie rolls, split lengthwise"
+    ]
   }
 ]

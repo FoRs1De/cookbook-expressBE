@@ -1,20 +1,15 @@
 [
   {
-    "data": "hi"
-  },
-  {
-    "data": "hi"
-  },
-  {
-    "data": "hi2"
-  },
-  {
-    "data": "hi2"
-  },
-  {
-    "data": "hi4"
-  },
-  {
-    "data": "hi4"
+    "id": 1,
+    "name": "Salmon Soup",
+    "group": "soups",
+    "image": "https://www.themediterraneandish.com/wp-content/uploads/2020/03/salmon-soup-recipe-5-1024x1536.jpg",
+    "description": "Finnish Salmon Soup, or Lohikeitto, is a simple Nordic salmon chowder and a comforting 30 minute meal made with a light cream broth, melt-in-your-mouth chunks of salmon, and tons of fresh dill!",
+    "ingredients": [
+      "500g salmon filet",
+      "60g butter",
+      "1 large leek",
+      "5 cups water"
+    ]
   }
 ]

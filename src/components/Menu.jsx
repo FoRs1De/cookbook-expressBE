@@ -10,19 +10,10 @@ const Menu = ({ recipes, loading }) => {
   const [menuOpen, setMenuOpen] = useState(true);
   const [expandedGroups, setExpandedGroups] = useState({});
 
-  console.log(expandedGroups);
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     console.log(menuOpen);
   };
-
-  // const toggleGroup = (groupName) => {
-  //   setExpandedGroups((prevExpandedGroups) => ({
-  //     ...prevExpandedGroups,
-  //     [groupName]: !prevExpandedGroups[groupName],
-  //   }));
-  // };
 
   const toggleGroup = (groupName) => {
     setExpandedGroups((prevExpandedGroups) => {
@@ -77,7 +68,7 @@ const Menu = ({ recipes, loading }) => {
                           .replace(/\s+/g, '-')
                           .toLowerCase()}/${recipe.name
                           .replace(/\s+/g, '-')
-                          .toLowerCase()}/${recipe.id}`}
+                          .toLowerCase()}`}
                       >
                         {recipe.name}
                       </NavLink>

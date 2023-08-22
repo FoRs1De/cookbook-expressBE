@@ -16,7 +16,7 @@ function App() {
   const { getCookbook } = Contentful();
   const [loading, setLoading] = useState(true);
   const [newRecipe, setNewRecipe] = useState();
-
+  const [alertForm, setAlertForm] = useState('');
   useEffect(() => {
     getCookbook()
       .then((res) => {
@@ -49,27 +49,18 @@ function App() {
     if (newRecipe) {
       const createNewEntry = async (newEntryData) => {
         try {
-          const url = `https://api.contentful.com/spaces/fvwgdnm4oux1/environments/master/entries`;
+          const url = `http://localhost:3000/api`;
 
-          const response = await axios.post(
-            url,
-            {
-              fields: newEntryData,
-            },
-            {
-              headers: {
-                'Content-Type': 'application/vnd.contentful.management.v1+json',
-                Authorization: `Bearer CFPAT-8FVJRToLGY4Ot_ur6xxSuO-qnVkDhNBuOekBefmjyqc`,
-                'X-Contentful-Content-Type': 'cookbook',
-              },
-            }
-          );
+          const response = await axios.post(url, newEntryData);
 
-          return response.data;
+          return response;
         } catch (error) {
           console.error('Error creating new entry:', error.message);
-          console.log(error);
-          return null;
+          setAlertForm(error.message);
+          const timeout = setTimeout(() => {
+            setAlertForm('');
+          }, 3000);
+          return () => clearTimeout(timeout);
         }
       };
 
@@ -79,44 +70,18 @@ function App() {
       createNewEntry(newEntryData).then((createdEntry) => {
         if (createdEntry) {
           console.log('New entry created:', createdEntry);
-
-          // Publish the created entry
-          const entryId = createdEntry.sys.id;
-          const publishEntry = async (entryId) => {
-            try {
-              const publishUrl = `https://api.contentful.com/spaces/fvwgdnm4oux1/environments/master/entries/${entryId}/published`;
-
-              const publishResponse = await axios.put(
-                publishUrl,
-                {},
-                {
-                  headers: {
-                    'Content-Type':
-                      'application/vnd.contentful.management.v1+json',
-                    Authorization: `Bearer CFPAT-8FVJRToLGY4Ot_ur6xxSuO-qnVkDhNBuOekBefmjyqc`,
-                    'X-Contentful-Content-Type': 'cookbook',
-                  },
-                }
-              );
-
-              return publishResponse.data;
-            } catch (error) {
-              console.error('Error publishing entry:', error.message);
-              console.log(error);
-              return null;
-            }
-          };
-
-          // Publish the created entry
-          publishEntry(entryId).then((publishedEntry) => {
-            if (publishedEntry) {
-              console.log('Entry published:', publishedEntry);
-            } else {
-              console.log('Failed to publish entry.');
-            }
-          });
+          setAlertForm('New recipe added');
+          const timeout = setTimeout(() => {
+            setAlertForm('');
+          }, 5000);
+          return () => clearTimeout(timeout);
         } else {
           console.log('Failed to create new entry.');
+          setAlertForm('Error, please contact administator');
+          const timeout = setTimeout(() => {
+            setAlertForm('');
+          }, 3000);
+          return () => clearTimeout(timeout);
         }
       });
     } else {
@@ -137,7 +102,7 @@ function App() {
               key={groupRecipe.group}
               path={`/${groupRecipe.group
                 .replace(/\s+/g, '-')
-                .toLowerCase()}/:recipe/:recipeId/`}
+                .toLowerCase()}/:recipeName/`}
               element={<Recipe recipe={recipe} loading={loading} />}
             />
           ))}
@@ -148,6 +113,7 @@ function App() {
                 recipe={recipe}
                 loading={loading}
                 setNewRecipe={setNewRecipe}
+                alertForm={alertForm}
               />
             }
           />

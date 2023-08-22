@@ -2,13 +2,13 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import { MenuItem } from '@mui/material';
 
-const Form = ({ recipe, loading, setNewRecipe }) => {
+const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
   const [selectedGroup, setSelectedGroup] = useState('');
   const [name, setName] = useState('');
   const [img, setImg] = useState('');
   const [description, setDescription] = useState('');
   const [ingredients, setIngredients] = useState([]);
-  console.log(img);
+
   let HandleChange = (e) => {
     let value = e.target.value;
     setSelectedGroup(value);
@@ -16,7 +16,7 @@ const Form = ({ recipe, loading, setNewRecipe }) => {
 
   let handleName = (e) => {
     let value = e.target.value;
-    setName(value);
+    setName(value.charAt(0).toUpperCase() + value.slice(1));
 
     const newIngredients = value
       .split(',')
@@ -45,21 +45,11 @@ const Form = ({ recipe, loading, setNewRecipe }) => {
   let handleSubmit = (e) => {
     e.preventDefault();
     let newItem = {
-      name: {
-        'en-US': name,
-      },
-      group: {
-        'en-US': selectedGroup,
-      },
-      image: {
-        'en-US': img,
-      },
-      description: {
-        'en-US': description,
-      },
-      ingredients: {
-        'en-US': ingredients,
-      },
+      name: name,
+      group: selectedGroup,
+      image: img,
+      description: description,
+      ingredients: ingredients,
     };
 
     setNewRecipe(newItem);
@@ -130,6 +120,9 @@ const Form = ({ recipe, loading, setNewRecipe }) => {
         />
         <button>Add recipe</button>
       </form>
+      <center>
+        <div className="alertForm">{alertForm}</div>
+      </center>
     </div>
   );
 };

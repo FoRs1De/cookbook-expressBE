@@ -4,9 +4,12 @@ const app = express();
 const port = 3000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+const { v4: uuid } = require('uuid');
 
-app.get('/', (req, res) => {
+const cors = require('cors');
+app.use(cors());
+app.use(bodyParser.json());
+app.get('/api', (req, res) => {
   const filePath = path.join(__dirname, 'data.json');
 
   const rawData = fs.readFileSync(filePath, 'utf8');
@@ -15,21 +18,58 @@ app.get('/', (req, res) => {
   res.json(existingData);
 });
 
-app.post('/', (req, res) => {
+app.post('/api', (req, res) => {
+  const filePath = path.join(__dirname, 'data.json');
+
+  const rawData = fs.readFileSync(filePath, 'utf8');
+  const existingData = JSON.parse(rawData);
+  const bodyData = req.body;
+  const recipeExists = existingData.some((recipe) => {
+    return recipe.name == bodyData.name;
+  });
+
+  if (!recipeExists) {
+    const newData = { id: uuid(), ...bodyData };
+    const finalData = [...existingData, newData];
+
+    fs.writeFileSync(filePath, JSON.stringify(finalData, null, 2));
+
+    res.send(`Data written to data.json
+  ${JSON.stringify(bodyData)}
+  `);
+  } else {
+    res
+      .status(400)
+      .send(`Error: recipe name exists, don't repeat your recipes`);
+  }
+});
+
+app.delete('/:group/:name/', (req, res) => {
   const filePath = path.join(__dirname, 'data.json');
 
   const rawData = fs.readFileSync(filePath, 'utf8');
   const existingData = JSON.parse(rawData);
 
-  const bodyData = req.body;
+  function titleCase(str) {
+    return str
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+  let itemName = req.params.name;
+  let itemToDelete = titleCase(itemName);
 
-  const newData = [...existingData, bodyData];
+  const itemIndex = existingData.findIndex((recipe) => {
+    return recipe.name === itemToDelete;
+  });
 
-  fs.writeFileSync(filePath, JSON.stringify(newData, null, 2));
-
-  res.send(`Data written to data.json
-  ${JSON.stringify(bodyData)}
-  `);
+  if (itemIndex !== -1) {
+    const deletedItem = existingData.splice(itemIndex, 1)[0];
+    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+    res.status(200).json({ message: 'Recipe deleted', recipe: deletedItem });
+  } else {
+    res.status(404).json({ error: 'Recipe not found' });
+  }
 });
 
 app.listen(port, () => {

@@ -2,10 +2,18 @@ import { useParams } from 'react-router-dom';
 import './Recipe.css';
 
 const Recipe = ({ recipe, loading }) => {
-  const { recipeId } = useParams();
+  const { recipeName } = useParams();
+  function titleCase(str) {
+    return str
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+
+  let startName = titleCase(recipeName);
 
   let filteredItem = recipe.filter((item) => {
-    return item.id == recipeId;
+    return item.name == startName;
   });
 
   return (
@@ -18,7 +26,7 @@ const Recipe = ({ recipe, loading }) => {
           <img
             className="pic"
             src={filteredItem[0].img}
-            alt={filteredItem[0].name}
+            alt={filteredItem.name}
           />
           <h3 className="Description">{filteredItem[0].description}</h3>
           <h3 className="ingredients-heading">Ingredients:</h3>

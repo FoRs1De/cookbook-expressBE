@@ -1,8 +1,30 @@
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './Recipe.css';
+import axios from 'axios';
 
-const Recipe = ({ recipe, loading }) => {
+const Recipe = ({ recipe, loading, setResponse }) => {
   const { recipeId } = useParams();
+  const navigate = useNavigate();
+  const handleDeleteClick = () => {
+    const url = `http://localhost:3000/api/${recipeId}`;
+    axios
+      .delete(url)
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        navigate('/');
+        setResponse(true);
+        const timeout = setTimeout(() => {
+          setResponse(false);
+        }, 1000);
+        () => clearTimeout(timeout);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  };
 
   let filteredItem = recipe.filter((item) => {
     return item.id == recipeId;
@@ -27,6 +49,7 @@ const Recipe = ({ recipe, loading }) => {
               {item}
             </p>
           ))}
+          <button onClick={handleDeleteClick}>Delete recipe</button>
         </>
       ) : (
         <p>No recipe found.</p>

@@ -44,23 +44,17 @@ app.post('/api', (req, res) => {
   }
 });
 
-app.delete('/:group/:name/', (req, res) => {
+app.delete('/api/:id', (req, res) => {
   const filePath = path.join(__dirname, 'data.json');
 
   const rawData = fs.readFileSync(filePath, 'utf8');
   const existingData = JSON.parse(rawData);
 
-  function titleCase(str) {
-    return str
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  }
-  let itemName = req.params.name;
-  let itemToDelete = titleCase(itemName);
+  let itemId = req.params.id;
+  let itemToDelete = itemId;
 
   const itemIndex = existingData.findIndex((recipe) => {
-    return recipe.name === itemToDelete;
+    return recipe.id === itemToDelete;
   });
 
   if (itemIndex !== -1) {

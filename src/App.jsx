@@ -104,7 +104,13 @@ function App() {
               path={`/${groupRecipe.group
                 .replace(/\s+/g, '-')
                 .toLowerCase()}/:recipeName/:recipeId`}
-              element={<Recipe recipe={recipe} loading={loading} />}
+              element={
+                <Recipe
+                  recipe={recipe}
+                  loading={loading}
+                  setResponse={setResponse}
+                />
+              }
             />
           ))}
           <Route

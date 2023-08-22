@@ -17,6 +17,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [newRecipe, setNewRecipe] = useState();
   const [alertForm, setAlertForm] = useState('');
+  const [response, setResponse] = useState(false);
   useEffect(() => {
     getCookbook()
       .then((res) => {
@@ -29,7 +30,7 @@ function App() {
         console.log(error);
         setLoading(false); // Handle the error and set loading to false
       });
-  }, []);
+  }, [response]);
 
   // Create a function to group recipes by group name
   const groupRecipesByGroup = (recipes) => {
@@ -52,36 +53,36 @@ function App() {
           const url = `http://localhost:3000/api`;
 
           const response = await axios.post(url, newEntryData);
-
+          setResponse(true);
+          const timeout = setTimeout(() => {
+            setResponse(false);
+          }, 1000);
+          () => clearTimeout(timeout);
           return response;
         } catch (error) {
           console.error('Error creating new entry:', error.message);
           setAlertForm(error.message);
           const timeout = setTimeout(() => {
             setAlertForm('');
-          }, 3000);
-          return () => clearTimeout(timeout);
+          }, 5000);
+          () => clearTimeout(timeout);
+          return;
         }
       };
 
       // Usage example
       const newEntryData = newRecipe;
-      console.log(newEntryData);
+
       createNewEntry(newEntryData).then((createdEntry) => {
         if (createdEntry) {
           console.log('New entry created:', createdEntry);
           setAlertForm('New recipe added');
           const timeout = setTimeout(() => {
             setAlertForm('');
-          }, 5000);
+          }, 3000);
           return () => clearTimeout(timeout);
         } else {
           console.log('Failed to create new entry.');
-          setAlertForm('Error, please contact administator');
-          const timeout = setTimeout(() => {
-            setAlertForm('');
-          }, 3000);
-          return () => clearTimeout(timeout);
         }
       });
     } else {
@@ -102,7 +103,7 @@ function App() {
               key={groupRecipe.group}
               path={`/${groupRecipe.group
                 .replace(/\s+/g, '-')
-                .toLowerCase()}/:recipeName/`}
+                .toLowerCase()}/:recipeName/:recipeId`}
               element={<Recipe recipe={recipe} loading={loading} />}
             />
           ))}

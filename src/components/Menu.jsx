@@ -68,7 +68,7 @@ const Menu = ({ recipes, loading }) => {
                           .replace(/\s+/g, '-')
                           .toLowerCase()}/${recipe.name
                           .replace(/\s+/g, '-')
-                          .toLowerCase()}`}
+                          .toLowerCase()}/${recipe.id}`}
                       >
                         {recipe.name}
                       </NavLink>

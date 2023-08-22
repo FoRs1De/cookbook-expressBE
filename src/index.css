@@ -5,7 +5,7 @@
 }
 Body {
   justify-content: center;
-  background-image: url(BackgroundIMG.jpg);
+  background-image: url('/BG.jpg');
   background-position: center;
   background-size: auto;
 }

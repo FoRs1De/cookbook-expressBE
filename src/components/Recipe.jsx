@@ -2,18 +2,10 @@ import { useParams } from 'react-router-dom';
 import './Recipe.css';
 
 const Recipe = ({ recipe, loading }) => {
-  const { recipeName } = useParams();
-  function titleCase(str) {
-    return str
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  }
-
-  let startName = titleCase(recipeName);
+  const { recipeId } = useParams();
 
   let filteredItem = recipe.filter((item) => {
-    return item.name == startName;
+    return item.id == recipeId;
   });
 
   return (

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-import { MenuItem } from '@mui/material';
+// import { MenuItem } from '@mui/material';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
   const [selectedGroup, setSelectedGroup] = useState('');
@@ -8,11 +9,13 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
   const [img, setImg] = useState('');
   const [description, setDescription] = useState('');
   const [ingredients, setIngredients] = useState([]);
+  const recipeGroups = Array.from(new Set(recipe.map((item) => item.group)));
 
-  let HandleChange = (e) => {
-    let value = e.target.value;
-    setSelectedGroup(value);
+  let HandleChange = (e, newValue) => {
+    setSelectedGroup(newValue);
   };
+
+  console.log(selectedGroup);
 
   let handleName = (e) => {
     let value = e.target.value;
@@ -75,7 +78,7 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
           onChange={handleName}
         />
 
-        <TextField
+        {/* <TextField
           required
           className="selectField"
           id="select"
@@ -85,12 +88,28 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
           value={selectedGroup}
           onChange={HandleChange}
         >
-          {recipe.map((option, index) => (
-            <MenuItem key={index} value={option.group}>
-              {option.group}
+          {recipeGroups.map((option, index) => (
+            <MenuItem key={index} value={option}>
+              {option}
             </MenuItem>
           ))}
-        </TextField>
+        </TextField> */}
+
+        <Autocomplete
+          freeSolo
+          options={recipeGroups}
+          inputValue={selectedGroup}
+          onInputChange={HandleChange}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Group *"
+              variant="outlined"
+              helperText="Choose or add group"
+            />
+          )}
+        />
+
         <TextField
           className="imageField"
           required

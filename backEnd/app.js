@@ -5,6 +5,7 @@ const port = 3000;
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const { v4: uuid } = require('uuid');
+
 //import client elephantSQL
 const client = require('./db/elephantsql.js');
 
@@ -31,7 +32,7 @@ app.get('/sql', (req, res) => {
       res.send(result.rows);
     });
   } catch (error) {
-    res.status(400).json({ error: 'Recipe not found' });
+    res.status(400).json({ error: 'Recipes not found' });
   }
 
   // res.json();
@@ -66,44 +67,40 @@ app.post('/api', (req, res) => {
 //POST REQUEST SQL
 app.post('/sql', async (req, res) => {
   try {
-    const { name, group, image, description, ingredients } = req.body;
+    const bodyData = req.body;
 
     // Check if the recipe name already exists in the database
-    const queryCheckExistence = 'SELECT COUNT(*) FROM recipes WHERE name = $1';
-    const existenceResult = await pool.query(queryCheckExistence, [name]);
+    const existenceResult = await client.query(
+      'SELECT COUNT(*) FROM recipes WHERE name = $1',
+      [bodyData.name]
+    );
     const recipeExists = parseInt(existenceResult.rows[0].count) > 0;
 
     if (recipeExists) {
       return res.status(400).json({ error: 'Recipe name already exists' });
     }
 
+    // Convert ingredients array to a single string
+    const ingredientsString = JSON.stringify(bodyData.ingredients);
+    const recipeId = uuid();
+
     // Insert new recipe into the database
     const queryInsertRecipe = `
-      INSERT INTO recipes (id, name, group, image, description) 
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO recipes (id, name, "group_name", image, description, ingredients) 
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
 
-    const recipeId = uuid(); // Generate a new UUID for the recipe
-    const insertRecipeResult = await pool.query(queryInsertRecipe, [
+    const insertRecipeResult = await client.query(queryInsertRecipe, [
       recipeId,
-      name,
-      group,
-      image,
-      description,
+      bodyData.name,
+      bodyData.group,
+      bodyData.image,
+      bodyData.description,
+      ingredientsString,
     ]);
+
     const insertedRecipe = insertRecipeResult.rows[0];
-
-    // Insert ingredients for the recipe into the database
-    const queryInsertIngredients = `
-      INSERT INTO ingredients (recipe_id, ingredient) 
-      VALUES ($1, $2);
-    `;
-
-    for (const ingredient of ingredients) {
-      await pool.query(queryInsertIngredients, [recipeId, ingredient]);
-    }
-
     res.status(201).json(insertedRecipe);
   } catch (error) {
     console.error('Error:', error);
@@ -129,6 +126,28 @@ app.delete('/api/:id', (req, res) => {
     res.status(200).json({ message: 'Recipe deleted', recipe: deletedItem });
   } else {
     res.status(404).json({ error: 'Recipe not found' });
+  }
+});
+
+app.delete('/sql/:id', async (req, res) => {
+  try {
+    const itemId = req.params.id;
+
+    // Delete the recipe with the given ID from the database
+    const deletionResult = await client.query(
+      `DELETE FROM recipes WHERE id = $1`,
+      [itemId]
+    );
+
+    // Check if any rows were affected by the deletion
+    if (deletionResult.rowCount === 0) {
+      return res.status(404).json({ error: 'Recipe not found' });
+    }
+
+    res.status(200).json({ message: 'Recipe deleted successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred' });
   }
 });
 

@@ -18,6 +18,9 @@ function App() {
   const [newRecipe, setNewRecipe] = useState();
   const [alertForm, setAlertForm] = useState('');
   const [response, setResponse] = useState(false);
+
+
+
   useEffect(() => {
     getCookbook()
       .then((res) => {
@@ -50,7 +53,7 @@ function App() {
     if (newRecipe) {
       const createNewEntry = async (newEntryData) => {
         try {
-          const url = `http://localhost:3000/api`;
+          const url = `http://localhost:3000/sql`;
 
           const response = await axios.post(url, newEntryData);
           setResponse(true);

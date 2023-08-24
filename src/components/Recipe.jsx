@@ -7,7 +7,7 @@ const Recipe = ({ recipe, loading, setResponse }) => {
   const { recipeId } = useParams();
   const navigate = useNavigate();
   const handleDeleteClick = () => {
-    const url = `http://localhost:3000/api/${recipeId}`;
+    const url = `http://localhost:3000/sql/${recipeId}`;
     axios
       .delete(url)
       .then(function (response) {

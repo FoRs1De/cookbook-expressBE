@@ -3,7 +3,7 @@ import axios from 'axios';
 const Contentful = () => {
   const getCookbook = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api');
+      const response = await axios.get('http://localhost:3000/sql');
       const entries = response.data;
 
       const saniEntries = entries.map((item) => {
@@ -12,7 +12,7 @@ const Contentful = () => {
         const ingredients = item.ingredients;
         const img = item.image;
         const id = item.id;
-        const group = item.group;
+        const group = item.group_name;
         return { name, description, ingredients, img, id, group };
       });
 

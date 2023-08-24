@@ -172,5 +172,34 @@
       "3 ounces Swiss cheese, thinly sliced",
       "4 hoagie rolls, split lengthwise"
     ]
+  },
+  {
+    "id": "a6648310-f9b4-4bc6-90ec-d821e1af3c84",
+    "name": "Dasdas",
+    "group": "soups",
+    "image": "asd",
+    "description": "asd",
+    "ingredients": [
+      "asd"
+    ]
   }
 ]
+
+
+// -- Create the recipes table
+// CREATE TABLE recipes (
+//     id VARCHAR(36) PRIMARY KEY,
+//     name VARCHAR(255) NOT NULL,
+//     group_name VARCHAR(255) NOT NULL,
+//     image VARCHAR(255),
+//     description TEXT,
+//     ingredients JSON
+// );
+
+// -- Insert recipe data
+// INSERT INTO recipes (id, name, group_name, image, description, ingredients)
+// VALUES
+//     ('1', 'Salmon Soup', 'soups', 'https://www.themediterraneandish.com/wp-content/uploads/2020/03/salmon-soup-recipe-5-1024x1536.jpg', 'Finnish Salmon Soup, or Lohikeitto, is a simple Nordic salmon chowder and a comforting 30 minute meal made with a light cream broth, melt-in-your-mouth chunks of salmon, and tons of fresh dill!', '["500g salmon filet", "60g butter", "1 large leek", "5 cups water"]'),
+//     ('2', 'Ham and Split Pea Soup', 'soups', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fpublic-assets.meredithcorp.io%2F2f30af94b9645d812507afb234ecfe2f%2F1677514092426IMG_1926.JPG&q=60&c=sc&orient=true&poi=auto&h=512', 'This cozy split pea soup with ham is hearty, flavorful, and oh-so comforting.', '["2 tablespoons butter", "2 ribs celery, diced", "0.5 onion, diced", "3 cloves garlic, sliced", "1 pound dried split peas, rinsed", "1 pound ham, diced", "1 bay leaf", "1 quart chicken stock", "2.5 cups water"]'),
+//     -- ... (insert data for other recipes here)
+//     ('10', 'Philly Steak Sandwich', 'lunch', 'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F8252452.jpg&q=60&c=sc&orient=true&poi=auto&h=512', 'These Philly cheesesteak sandwiches are made with a delicious seasoning of herbs and spices.', '["0.5 teaspoon salt", "0.5 teaspoon black pepper", "0.5 teaspoon paprika", "0.5 teapsoon onion powder", "0.5 teaspoon garlic powder", "0.5 teaspoon dried thyme", "0.5 teaspoon dried marjoram", "0.5 teaspoon dried basil", "1 pound beef sirloin, cut into thin 2 inch strips", "3 tablespoons vegetable oil", "1 onion, sliced", "1 green bell pepper, julienned", "3 ounces Swiss cheese, thinly sliced", "4 hoagie rolls, split lengthwise"]');

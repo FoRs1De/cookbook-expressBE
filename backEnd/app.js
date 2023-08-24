@@ -26,7 +26,7 @@ app.get('/sql', (req, res) => {
   try {
     client.query(`SELECT * FROM recipes;`, (err, result) => {
       if (err) {
-        return res.status(404).send('Error running query: '+ err.message);
+        return res.status(404).send('Error running query: ' + err.message);
       }
       res.send(result.rows);
     });
@@ -63,6 +63,54 @@ app.post('/api', (req, res) => {
   }
 });
 
+//POST REQUEST SQL
+app.post('/sql', async (req, res) => {
+  try {
+    const { name, group, image, description, ingredients } = req.body;
+
+    // Check if the recipe name already exists in the database
+    const queryCheckExistence = 'SELECT COUNT(*) FROM recipes WHERE name = $1';
+    const existenceResult = await pool.query(queryCheckExistence, [name]);
+    const recipeExists = parseInt(existenceResult.rows[0].count) > 0;
+
+    if (recipeExists) {
+      return res.status(400).json({ error: 'Recipe name already exists' });
+    }
+
+    // Insert new recipe into the database
+    const queryInsertRecipe = `
+      INSERT INTO recipes (id, name, group, image, description) 
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+
+    const recipeId = uuid(); // Generate a new UUID for the recipe
+    const insertRecipeResult = await pool.query(queryInsertRecipe, [
+      recipeId,
+      name,
+      group,
+      image,
+      description,
+    ]);
+    const insertedRecipe = insertRecipeResult.rows[0];
+
+    // Insert ingredients for the recipe into the database
+    const queryInsertIngredients = `
+      INSERT INTO ingredients (recipe_id, ingredient) 
+      VALUES ($1, $2);
+    `;
+
+    for (const ingredient of ingredients) {
+      await pool.query(queryInsertIngredients, [recipeId, ingredient]);
+    }
+
+    res.status(201).json(insertedRecipe);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
 app.delete('/api/:id', (req, res) => {
   const filePath = path.join(__dirname, 'data.json');
 
@@ -70,10 +118,9 @@ app.delete('/api/:id', (req, res) => {
   const existingData = JSON.parse(rawData);
 
   let itemId = req.params.id;
-  let itemToDelete = itemId;
 
   const itemIndex = existingData.findIndex((recipe) => {
-    return recipe.id === itemToDelete;
+    return recipe.id === itemId;
   });
 
   if (itemIndex !== -1) {

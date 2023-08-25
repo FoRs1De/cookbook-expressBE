@@ -39,7 +39,7 @@ const Recipe = ({ recipe, loading, setResponse }) => {
           <h1 className="Title-Recipe">{filteredItem[0].name}</h1>
           <img
             className="pic"
-            src={filteredItem[0].img}
+            src={`http://localhost:3000/images/${filteredItem[0].img}`}
             alt={filteredItem.name}
           />
           <h3 className="Description">{filteredItem[0].description}</h3>

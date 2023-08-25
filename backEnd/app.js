@@ -6,6 +6,18 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const { v4: uuid } = require('uuid');
 
+// multer configuration
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/'); // Specify the destination directory for uploaded files
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '')); // Use a unique filename
+  },
+});
+const upload = multer({ storage: storage });
+
 //import client elephantSQL
 const client = require('./db/elephantsql.js');
 
@@ -64,10 +76,13 @@ app.post('/api', (req, res) => {
   }
 });
 
+app.use('/images', express.static('uploads'));
+
 //POST REQUEST SQL
-app.post('/sql', async (req, res) => {
+app.post('/sql', upload.single('file'), async (req, res) => {
   try {
     const bodyData = req.body;
+    const file = req.file.filename;
 
     // Check if the recipe name already exists in the database
     const existenceResult = await client.query(
@@ -81,7 +96,7 @@ app.post('/sql', async (req, res) => {
     }
 
     // Convert ingredients array to a single string
-    const ingredientsString = JSON.stringify(bodyData.ingredients);
+    const ingredientsString = bodyData.ingredients;
     const recipeId = uuid();
 
     // Insert new recipe into the database
@@ -95,7 +110,7 @@ app.post('/sql', async (req, res) => {
       recipeId,
       bodyData.name,
       bodyData.group,
-      bodyData.image,
+      file,
       bodyData.description,
       ingredientsString,
     ]);

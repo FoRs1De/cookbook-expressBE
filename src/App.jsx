@@ -19,8 +19,6 @@ function App() {
   const [alertForm, setAlertForm] = useState('');
   const [response, setResponse] = useState(false);
 
-
-
   useEffect(() => {
     getCookbook()
       .then((res) => {
@@ -124,6 +122,8 @@ function App() {
                 loading={loading}
                 setNewRecipe={setNewRecipe}
                 alertForm={alertForm}
+                setAlertForm={setAlertForm}
+                setResponse={setResponse}
               />
             }
           />

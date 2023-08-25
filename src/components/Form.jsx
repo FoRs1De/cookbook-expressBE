@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 // import { MenuItem } from '@mui/material';
+import axios from 'axios';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
+const Form = ({ recipe, setAlertForm, setResponse, alertForm }) => {
   const [selectedGroup, setSelectedGroup] = useState('');
   const [name, setName] = useState('');
   const [img, setImg] = useState('');
@@ -14,8 +15,6 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
   let HandleChange = (e, newValue) => {
     setSelectedGroup(newValue);
   };
-
-  console.log(selectedGroup);
 
   let handleName = (e) => {
     let value = e.target.value;
@@ -28,8 +27,8 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
   };
 
   let handleImg = (e) => {
-    let value = e.target.value;
-    setImg(value);
+    const file = e.target.files[0];
+    setImg(file);
   };
 
   let handleDescription = (e) => {
@@ -45,17 +44,40 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
     setIngredients(newIngredients);
   };
 
-  let handleSubmit = (e) => {
+  let handleSubmit = async (e) => {
     e.preventDefault();
-    let newItem = {
-      name: name,
-      group: selectedGroup,
-      image: img,
-      description: description,
-      ingredients: ingredients,
-    };
 
-    setNewRecipe(newItem);
+    let formData = new FormData();
+    formData.append('name', name);
+    formData.append('group', selectedGroup);
+    formData.append('file', img);
+    formData.append('description', description);
+    const ingredientsString = JSON.stringify(ingredients);
+    formData.append('ingredients', ingredientsString);
+    try {
+      const response = await axios.post('http://localhost:3000/sql', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // Handle response as needed
+      console.log(response.data);
+      setAlertForm('New recipe added');
+      setResponse(true);
+      const timeout = setTimeout(() => {
+        setAlertForm('');
+        setResponse(false);
+      }, 3000);
+      () => clearTimeout(timeout);
+    } catch (error) {
+      console.error('Error creating new entry:', error.message);
+      setAlertForm(error.message);
+      const timeout = setTimeout(() => {
+        setAlertForm('');
+      }, 5000);
+      () => clearTimeout(timeout);
+    }
 
     setName('');
     setSelectedGroup('');
@@ -66,7 +88,7 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
   };
 
   return (
-    <div className="form">
+    <div className="form" encType="multipart/form-data">
       <form onSubmit={handleSubmit} id="newRecipeForm">
         <TextField
           className="nameField"
@@ -110,7 +132,7 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
           )}
         />
 
-        <TextField
+        {/* <TextField
           className="imageField"
           required
           id="outlined-required"
@@ -118,7 +140,10 @@ const Form = ({ recipe, loading, setNewRecipe, alertForm }) => {
           placeholder="http://..."
           helperText="Add link to img"
           onChange={handleImg}
-        />
+        /> */}
+
+        <input type="file" name="file" onChange={handleImg} />
+
         <TextField
           className="descriptionField"
           required
